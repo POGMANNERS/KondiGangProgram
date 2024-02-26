@@ -1,2 +1,2 @@
 # KondiGangProgram
-- Rendszerfejlesztés Haladó Módszerei beadandó "CSak a minimum" -Anonymus 2023
+- Rendszerfejlesztés Haladó Módszerei beadandó "Csak a minimum" - Anonymus 2024
