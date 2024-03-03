@@ -10,5 +10,7 @@ felhasznalok = mydb["felhasznalok"]
 alkatresz = mydb["alkatresz"]
 projekt= mydb["projekt"]
 
-print(*projekt.find({"nev": "Napelem-Páka"}))
+# ha kódot futtatsz teszteléshez, egy ilyen blokkba kell rakni
+if __name__ == "__main__":
+    print(*projekt.find({"nev": "Napelem-Páka"}))
 
