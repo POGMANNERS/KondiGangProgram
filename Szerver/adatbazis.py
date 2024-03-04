@@ -10,7 +10,7 @@ class db:
     # Kollekció kiválasztása (ha nem létezik, létre fog jönni)
     user = mydb["user"]
     part = mydb["part"]
-    projekt= mydb["projekt"]
+    projekt = mydb["projekt"]
     storage = mydb["storage"]
 
     @classmethod
