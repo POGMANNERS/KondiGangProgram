@@ -2,7 +2,7 @@ from flask import session
 from functools import wraps
 from user import User, Level
 from hashing import hashing
-from adatbazis import db
+from database import db
 
 def login_required(func):
     """ Login ellenőrző decorator """

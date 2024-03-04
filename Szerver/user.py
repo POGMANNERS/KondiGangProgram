@@ -1,11 +1,11 @@
-from adatbazis import db
+from database import db
 from enum import Enum
 
 class Level(Enum):
-    ADMIN = 0
-    SZAKEMBER = 1
-    RAKTARVEZETO = 2
-    RAKTAROS = 3
+    admin = 0
+    professional = 1
+    manager = 2
+    operator = 3
 
 class User:
     def __new__(cls, username):
@@ -27,4 +27,4 @@ class User:
 
 
 if __name__ == "__main__":
-    print(User("Potter"))
+    print(isinstance(Level(0).name, str))
