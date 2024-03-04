@@ -8,56 +8,66 @@ class db:
     mydb = client["rendszerfejlesztes"]
 
     # Kollekció kiválasztása (ha nem létezik, létre fog jönni)
-    felhasznalok = mydb["felhasznalok"]
-    alkatresz = mydb["alkatresz"]
+    user = mydb["user"]
+    part = mydb["part"]
     projekt= mydb["projekt"]
-    raktar = mydb["raktar"]
+    storage = mydb["storage"]
 
     @classmethod
     def getUser(cls, id):
-        user = cls.felhasznalok.find_one({"_id": ObjectId(id)})
+        user = cls.user.find_one({"_id": ObjectId(id)})
+        return user
+
+    @classmethod
+    def getUserByUsername(cls, username):
+        user = cls.user.find_one({"username": username})
         return user
 
     @classmethod
     def addPart(cls, name, price, maxnum):
-        part = cls.alkatresz.insert_one({ "alkatresz_nev": name, "alkatresz_ar":price, "maxdb": maxnum})
+        part = cls.part.insert_one({"name": name, "price":price, "maxnum": maxnum})
         return part
 
     @classmethod
     def modifyPart(cls, id, name, price, maxnum):
-        part = cls.alkatresz.update_one({"_id":ObjectId(id)},{"$set":{ "alkatresz_nev": name, "alkatresz_ar":price, "maxdb": maxnum}})
+        part = cls.part.update_one({"_id":ObjectId(id)}, {"$set":{"name": name, "price":price, "maxnum": maxnum}})
         return part
 
     @classmethod
     def listParts(cls):
-        parts = cls.alkatresz.find()
+        parts = cls.part.find()
         return parts
 
     @classmethod
     def addUser(cls,username,password,salt,level,name):
-        user = cls.felhasznalok.insert_one({"felhasznalonev": username,"jelszo": password,"salt": salt,"jogosultsag": level,"nev": name})
-        return user
+        if cls.user.find_one({"username":username}):
+            return None
+        else:
+            user = cls.user.insert_one({"username": username, "password": password, "salt": salt, "level": level, "name": name})
+            return user
 
     @classmethod
     def addStorage(cls):
-        cls.raktar.drop()
-        storage = cls.raktar.insert_one({
-            "sorok": [
-                {"oszlopok":  [
-                    {"rekeszek":  [
+        cls.storage.drop()
+        storage = cls.storage.insert_one({
+            "rows": [
+                {"columns":  [
+                    {"compartments":  [
                         {
-                            "alkatresz_id": 1,
-                            "db" : 2
+                            "part_id": 1,
+                            "number" : 2
                         }
                     ]}
                 ]}
             ]
         })
 
+
+
 # ha kódot futtatsz teszteléshez, egy ilyen blokkba kell rakni
 if __name__ == "__main__":
     print(db.addPart("Napelem", "300", 3))
-    print(db.modifyPart("65e5b086c099210a07e0a5e5",name="napelem",price="200",maxnum=4))
+    print(db.modifyPart("65e5fe2b091ee18e83023afe",name="napelem",price="200",maxnum=4))
     print(*db.listParts())
-    print(db.addUser("Potter","aa","bb",1,"Jandovics Ákos Attila"))
+    print(db.addUser("Potterrr","aa","bb",1,"Jandovics Ákos Attila"))
     print(db.addStorage())
