@@ -10,6 +10,7 @@ class db:
     felhasznalok = mydb["felhasznalok"]
     alkatresz = mydb["alkatresz"]
     projekt= mydb["projekt"]
+    raktar = mydb["raktar"]
 
     @classmethod
     def getUser(cls, id):
@@ -33,6 +34,21 @@ class db:
     def addUser(cls,username,password,salt,level,name):
         user=cls.felhasznalok.insert_one({"felhasznalonev": username,"jelszo": password,"salt": salt,"jogosultsag": level,"nev": name})
         return user
+    @classmethod
+    def addStorage(cls):
+        cls.raktar.drop()
+        storage=cls.raktar.insert_one({
+            "sorok": [
+                {"oszlopok":  [
+                    {"rekeszek":  [
+                        {
+                            "alkatresz_id": 1,
+                            "db" : 2
+                        }
+                    ]}
+                ]}
+            ]
+        })
 
 # ha kódot futtatsz teszteléshez, egy ilyen blokkba kell rakni
 if __name__ == "__main__":
@@ -40,3 +56,4 @@ if __name__ == "__main__":
     print(db.modifyPart("65e5aa117a834ed19b9f330b",name="napelem",price="200",maxnum=4))
     print(*db.listParts())
     print(db.addUser("Potter","aa","bb",1,"Jandovics Ákos Attila"))
+    print(db.addStorage())
