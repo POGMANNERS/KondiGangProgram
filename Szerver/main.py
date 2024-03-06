@@ -36,7 +36,6 @@ def parts_mod():
         return ret
     else:
         return "Failed"
-    pass
 
 @app.route("/users-new", methods=['GET', 'POST'])
 @auth.permission_required(Level.admin)
