@@ -29,17 +29,17 @@ def permission_required(level):
         return inner
     return decorator
 
-def login(username, password) -> bool:
+def login(username, password):
     """ Login függvény """
     user = User(username)
     if user is None:
-        return False
+        return None
     else:
         if user.password == hashing.hashPassword(password, user.salt):
             session["user"] = user.username
-            return True
+            return Level(user.level).name
         else:
-            return False
+            return None
 
 def logout():
     """ Logout függvény """

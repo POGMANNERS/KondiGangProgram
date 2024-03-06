@@ -2,18 +2,21 @@ from database import db
 from enum import Enum
 
 class Level(Enum):
+    """ Level enum, jogosultságok feldolgozására """
     admin = 0
     professional = 1
     manager = 2
     operator = 3
 
 class User:
-    def __new__(cls, username):
+    def __new__(cls, username: str):
+        """ Ha nem létezik a felhasználó, megszakítja a konstruktort """
         doc = db.getUserByUsername(username)
         if doc is not None:
             return super().__new__(cls)
 
-    def __init__(self, username):
+    def __init__(self, username: str):
+        """ User konstruktor, username -> User """
         doc = db.getUserByUsername(username)
         for k,v in doc.items():
             self.__setattr__(k,v)
