@@ -1,5 +1,4 @@
 from flask import Flask, session, request
-import json
 import auth
 from user import Level
 from database import db
@@ -11,7 +10,7 @@ app.secret_key = "40e2d93e1f4e61d32e7c4c73de53648b811a6c0d0aa3e73ab16158aef69e43
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
-    data = json.loads(request.data)
+    data = request.json
     if level := auth.login(data['username'], data['password']):
         return str(level)
     else:
@@ -31,7 +30,7 @@ def parts_get():
 @app.route("/parts-modify", methods=['GET', 'POST'])
 @auth.permission_required(Level.manager)
 def parts_mod():
-    data = json.loads(request.data)
+    data = request.json
     if ret := db.modifyPart(**data):
         return ret
     else:
@@ -40,7 +39,7 @@ def parts_mod():
 @app.route("/users-new", methods=['GET', 'POST'])
 @auth.permission_required(Level.admin)
 def users_new():
-    data = json.loads(request.data)
+    data = request.json
     if auth.registerUser(**data):
         return "Success"
     else:
