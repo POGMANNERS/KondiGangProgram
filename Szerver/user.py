@@ -9,6 +9,12 @@ class Level(Enum):
     operator = 3
 
 class User:
+    username: str
+    password: bytes
+    salt: bytes
+    level: int
+    name: str
+
     def __new__(cls, username: str):
         """ Ha nem létezik a felhasználó, megszakítja a konstruktort """
         doc = db.getUserByUsername(username)
