@@ -49,25 +49,20 @@ class db:
     @classmethod
     def addStorage(cls):
         cls.storage.drop()
-        storage = cls.storage.insert_one({
-            "rows": [
-                {"columns":  [
-                    {"compartments":  [
-                        {
-                            "part_id": 1,
-                            "number" : 2
-                        }
-                    ]}
-                ]}
-            ]
-        })
+        storage=[10*[4*[6*[{"part_id":0, "number":0}]]]]
+        print(storage)
+
+        cls.storage.insert_one({"storage":storage})
+
+
+
 
 
 
 # ha kódot futtatsz teszteléshez, egy ilyen blokkba kell rakni
 if __name__ == "__main__":
-    print(db.addPart("Napelem", "300", 3))
-    print(db.modifyPart("65e5fe2b091ee18e83023afe",name="napelem",price="200",maxnum=4))
-    print(*db.listParts())
-    print(db.addUser("Potterrr","aa","bb",1,"Jandovics Ákos Attila"))
+    #print(db.addPart("Napelem", "300", 3))
+    #print(db.modifyPart("65e5fe2b091ee18e83023afe",name="napelem",price="200",maxnum=4))
+    #print(*db.listParts())
+    #print(db.addUser("Potterrr","aa","bb",1,"Jandovics Ákos Attila"))
     print(db.addStorage())
