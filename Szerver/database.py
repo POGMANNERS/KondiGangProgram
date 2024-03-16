@@ -55,16 +55,16 @@ class db:
         cls.storage.insert_one({"storage":storage})
     @classmethod
     def EXAMPLE(cls):
-        db.storage.drop()
-        db.part.drop()
-        db.user.drop()
-        db.addStorage()
-        db.addPart("Napelem", "300", 3)
-        db.addPart("Vezeték", "200", 10)
-        db.addPart("Vezérlő", "600", 5)
-        db.addUser("Potter", "aa", "bb", 1, "Jandovics Ákos Attila")
-        db.addUser("YANDO", "aa", "bb", 1, "Példa Ákos")
-        db.addUser("LANDI", "aa", "bb", 1, "Landi Miklós")
+        cls.storage.drop()
+        cls.part.drop()
+        cls.user.drop()
+        cls.addStorage()
+        cls.addPart("Napelem", "300", 3)
+        cls.addPart("Vezeték", "200", 10)
+        cls.addPart("Vezérlő", "600", 5)
+        cls.addUser("Potter", "aa", "bb", 1, "Jandovics Ákos Attila")
+        cls.addUser("YANDO", "aa", "bb", 1, "Példa Ákos")
+        cls.addUser("LANDI", "aa", "bb", 1, "Landi Miklós")
 
 
 
