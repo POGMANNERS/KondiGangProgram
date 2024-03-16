@@ -15,7 +15,7 @@ def login():
     if level := auth.login(data['username'], data['password']):
         return str(level)
     else:
-        return "Denied"
+        return "Denied", 401
 
 @app.route("/logout", methods=['GET', 'POST'])
 @auth.login_required
@@ -30,7 +30,7 @@ def parts_new():
     if db.addPart(**data):
         return "Success"
     else:
-        return "Failed"
+        return "Failed", 409
 
 @app.route("/parts-get", methods=['GET', 'POST'])
 @auth.permission_required(Level.manager)
@@ -44,7 +44,7 @@ def parts_mod():
     if db.modifyPart(**data):
         return "Success"
     else:
-        return "Failed"
+        return "Failed", 409
 
 @app.route("/users-new", methods=['GET', 'POST'])
 @auth.permission_required(Level.admin)
@@ -53,7 +53,7 @@ def users_new():
     if auth.registerUser(**data):
         return "Success"
     else:
-        return "Failed"
+        return "Failed", 409
 
 
 

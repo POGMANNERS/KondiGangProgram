@@ -11,7 +11,7 @@ def login_required(func):
         if 'user' in session and session['user']:
             return func(*args, **kwargs)
         else:
-            return "Denied"
+            return "Denied", 401
     return inner
 
 def permission_required(level):
@@ -20,12 +20,12 @@ def permission_required(level):
         @wraps(func)
         def inner(*args, **kwargs):
             if "user" not in session and not session.get("user"):
-                return "Denied"
+                return "Denied", 401
             user = User(session["user"])
             if Level(user.level) == level:
                 return func(*args, **kwargs)
             else:
-                return "Denied"
+                return "Denied", 403
         return inner
     return decorator
 

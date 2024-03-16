@@ -25,7 +25,7 @@ class db:
 
     @classmethod
     def addPart(cls, name, price, maxnum):
-        part = cls.part.insert_one({"name": name, "price":price, "maxnum": maxnum})
+        part = cls.part.insert_one({"name": name, "price": price, "maxnum": maxnum})
         return part
 
     @classmethod
