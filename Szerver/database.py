@@ -14,8 +14,8 @@ class db:
     storage = mydb["storage"]
 
     @classmethod
-    def getUser(cls, id):
-        user = cls.user.find_one({"_id": ObjectId(id)})
+    def getUser(cls, _id):
+        user = cls.user.find_one({"_id": ObjectId(_id)})
         return user
 
     @classmethod
@@ -29,8 +29,8 @@ class db:
         return part
 
     @classmethod
-    def modifyPart(cls, id, name, price, maxnum):
-        part = cls.part.update_one({"_id":ObjectId(id)}, {"$set":{"name": name, "price":price, "maxnum": maxnum}})
+    def modifyPart(cls, _id, name, price, maxnum):
+        part = cls.part.update_one({"_id":ObjectId(_id)}, {"$set":{"name": name, "price":price, "maxnum": maxnum}})
         return part
 
     @classmethod
@@ -39,7 +39,7 @@ class db:
         return parts
 
     @classmethod
-    def addUser(cls,username,password,salt,level,name):
+    def addUser(cls, username, password, salt, level, name):
         if cls.user.find_one({"username":username}):
             return None
         else:
