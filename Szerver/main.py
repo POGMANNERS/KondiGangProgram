@@ -2,6 +2,7 @@ from flask import Flask, session, request
 import auth
 from user import Level
 from database import db
+from bson import json_util
 
 app = Flask(__name__)
 app.secret_key = "40e2d93e1f4e61d32e7c4c73de53648b811a6c0d0aa3e73ab16158aef69e43d4"
@@ -22,17 +23,26 @@ def logout():
     auth.logout()
     return "Success"
 
+@app.route("/parts-new", methods=['GET', 'POST'])
+@auth.permission_required(Level.manager)
+def parts_new():
+    data = request.json
+    if db.addPart(**data):
+        return "Success"
+    else:
+        return "Failed"
+
 @app.route("/parts-get", methods=['GET', 'POST'])
 @auth.permission_required(Level.manager)
 def parts_get():
-    return db.listParts()
+    return json_util.dumps(db.listParts())
 
 @app.route("/parts-modify", methods=['GET', 'POST'])
 @auth.permission_required(Level.manager)
 def parts_mod():
     data = request.json
-    if ret := db.modifyPart(**data):
-        return ret
+    if db.modifyPart(**data):
+        return "Success"
     else:
         return "Failed"
 
