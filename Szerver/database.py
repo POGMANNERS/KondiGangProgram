@@ -62,6 +62,7 @@ class db:
         cls.addPart("Napelem", "300", 3)
         cls.addPart("Vezeték", "200", 10)
         cls.addPart("Vezérlő", "600", 5)
+        # nincs hashelve, nem jó
         cls.addUser("Potter", "aa", "bb", 1, "Jandovics Ákos Attila")
         cls.addUser("YANDO", "aa", "bb", 1, "Példa Ákos")
         cls.addUser("LANDI", "aa", "bb", 1, "Landi Miklós")

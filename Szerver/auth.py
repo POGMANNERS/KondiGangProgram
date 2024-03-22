@@ -51,3 +51,6 @@ def registerUser(**kwargs):
     newuser['salt'] = hashing.newSalt()
     newuser['password'] = hashing.hashPassword(newuser['password'], newuser['salt'])
     return db.addUser(**newuser)
+
+if __name__ == '__main__':
+    registerUser(username="landi", password="landi", level=1, name="Landi")
