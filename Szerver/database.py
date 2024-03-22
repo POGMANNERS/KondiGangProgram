@@ -53,19 +53,6 @@ class db:
         #print(storage)
 
         cls.storage.insert_one({"storage":storage})
-    @classmethod
-    def EXAMPLE(cls):
-        cls.storage.drop()
-        cls.part.drop()
-        cls.user.drop()
-        cls.addStorage()
-        cls.addPart("Napelem", "300", 3)
-        cls.addPart("Vezeték", "200", 10)
-        cls.addPart("Vezérlő", "600", 5)
-        # nincs hashelve, nem jó
-        cls.addUser("Potter", "aa", "bb", 1, "Jandovics Ákos Attila")
-        cls.addUser("YANDO", "aa", "bb", 1, "Példa Ákos")
-        cls.addUser("LANDI", "aa", "bb", 1, "Landi Miklós")
 
 
 
@@ -74,9 +61,4 @@ class db:
 
 # ha kódot futtatsz teszteléshez, egy ilyen blokkba kell rakni
 if __name__ == "__main__":
-    #(db.addPart("Napelem", "300", 3))
-    #print(db.modifyPart("65e5fe2b091ee18e83023afe",name="napelem",price="200",maxnum=4))
-    #print(*db.listParts())
-    #(db.addUser("Potterrr","aa","bb",1,"Jandovics Ákos Attila"))
-    #print(db.addStorage())
-    db.EXAMPLE()
+    pass
