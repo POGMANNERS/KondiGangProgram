@@ -11,3 +11,4 @@ if __name__ == '__main__':
     db.addPart("Vezérlő", "600", 5)
     auth.registerUser(username="admin", password="admin", level=0, name="admin")
     auth.registerUser(username="landi", password="landi", level=1, name="Landi")
+    auth.registerUser(username="gergo", password="gergo", level=2, name="Gergő")

@@ -30,7 +30,7 @@ class db:
 
     @classmethod
     def modifyPart(cls, _id, name, price, maxnum):
-        part = cls.part.update_one({"_id":ObjectId(_id)}, {"$set":{"name": name, "price":price, "maxnum": maxnum}})
+        part = cls.part.update_one({"_id":ObjectId(_id["$oid"])}, {"$set":{"name": name, "price":price, "maxnum": maxnum}})
         return part
 
     @classmethod
